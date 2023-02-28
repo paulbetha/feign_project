@@ -1,0 +1,29 @@
+package com.example.demo;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RestController;
+
+@RestController
+public class AppController {
+
+ @Autowired
+ ProductServiceClient productServiceClient;
+
+ @GetMapping("/fetchProducts")
+ public  ResponseEntity<List<?>> fetchProducts() {
+
+  return ResponseEntity.ok(productServiceClient.getProducts());
+ }
+
+ @GetMapping("/fetchProduct/{id}")
+ public  ResponseEntity<?> fetchProduct(@PathVariable int id) {
+
+  return ResponseEntity.ok(productServiceClient.getProduct(id));
+ }
+
+}
